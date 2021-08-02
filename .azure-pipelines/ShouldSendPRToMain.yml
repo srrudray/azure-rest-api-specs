@@ -1,0 +1,8 @@
+jobs:
+  - job: "ShouldSendPRToMain"
+    pool:
+      vmImage: 'Ubuntu 16.04'
+    condition: and(not(variables['PRIVATE']), eq(variables['System.PullRequest.TargetBranch'], 'master'))
+    steps:
+    - script: '>&2 echo "Please edit the pull request to targeting new default branch main"'
+      failOnStderr: true
